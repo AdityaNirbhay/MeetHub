@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
+    <title>MeetHub</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<script src="test.js" ></script>
+<body>
+    <div class="wrapper">
+        <div class="navbar">
+
+            <div class="left-corner">
+                <img src="favicon.png" alt="Logo-image" class="logo-image">
+                <div class="logo-text">meetHub</div>
+            </div>
+        
+            <div class="right-corner">
+                <div>
+                    <button class="login-button">Login</button>
+                </div>
+                <div>
+                    <button class="signup-button">Sign Up</button>
+                </div>
+            </div>
+        </div>
+
+    
+        <div class="main-section">
+            <div class="left-part">
+             
+                <div class="display-text">
+                    Seamless Meetings, <br> Superior Collaboration
+                </div>
+                <div class="button-join">
+                  
+                    <div class="generate-meet" onclick="toggleMeetingDetails()">New Meeting</div>
+                    
+                    <div class="meeting-details blur" id="meetingDetails">
+                        <div class="meeting-id">Meeting ID: <span id="randomMeetingId">ABC123</span></div>
+                        <button class="start-meeting">Start Meeting</button>
+                    </div>
+                
+                    <input class="input-label" type="text" placeholder="Enter a code or link">
+                    <div class="join-meet">Join</div>
+                </div>
+            </div>
+
+            <div class="right-part">
+                <div class="video-part">
+                    <video src="vecteezy_2d-people-in-meeting_35616783.mp4" autoplay loop muted class="video"></video>
+                </div> 
+            </div>
+        </div>
+    </div>
+</body>
+</html>
