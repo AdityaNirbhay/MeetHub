@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Call</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    header {
+      background-color: #333;
+      padding: 20px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #meetingIdContainer {
+      display: flex;
+      align-items: center;
+    }
+
+    #meetingId {
+      font-size: 24px;
+      margin-right: auto;
+    }
+
+    #flipButton {
+      margin-left: auto;
+    }
+
+    #flipButton button {
+      font-size: 40px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 70vh;
+    }
+
+    #videoContainer {
+      width: 90%;
+      height: 90%;
+      background-color: #ddd;
+    }
+
+    footer {
+      background-color: #333;
+      padding: 30px;
+      color: white;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    .emoji-container {
+      background-color: white;
+      border-radius: 100%;
+      padding: 10px;
+      margin: 0 10px;
+    }
+
+    #reactButton {
+      background-color: white;
+      border-radius: 50%;
+      color: rgb(24, 23, 23);
+      cursor: pointer;
+      font-size: 21px;
+      padding-left: 10px;padding-right: 10px;
+    }
+
+    #reactMenu {
+      display: none;
+      position: fixed;
+      bottom: 150px;
+      right: 20px;
+      z-index: 1;
+    }
+
+    .rain-shower {
+      position: absolute;
+      animation: emojiRain 3s linear infinite;
+    }
+
+    @keyframes emojiRain {
+      0% {
+        opacity: 0;
+        transform: translateY(0);
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(300px);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(600px);
+      }
+    }
+
+    footer .emoji-container:hover,
+    #reactButton:hover,
+    #flipButton:hover {
+      transform: scale(1.1);
+    }
+  </style>
+
+</head>
+
+<body class="bg-gray-100">
+
+  <header class="bg-gray-800 p-5 text-white flex justify-between items-center">
+    <div id="meetingIdContainer" class="flex items-center">
+      <div id="meetingId" class="text-2xl">Meeting ID: XXXXXXX</div>
+    </div>
+    <div id="flipButton"><button class="text-4xl">&#x21bb;</button></div>
+  </header>
+
+  <main class="flex justify-center items-center h-70vh">
+    <div id="videoContainer"></div>
+  </main>
+
+  <footer class="bg-gray-800 p-8 text-white flex justify-around items-center fixed bottom-0 w-full">
+    <div class="emoji-container"><button class="text-xl">&#128222;</button></div>
+    <div class="emoji-container"><button class="text-xl">&#x1f465;</button></div>
+    <div class="emoji-container" id="micButton"><button class="text-xl">&#128266;</button></div>
+    <div class="emoji-container" id="offMicButton" style="display: none;"><button class="text-xl">&#x1f507;</button></div>
+    <div class="emoji-container" id="videoButton"><button class="text-xl">&#127910;</button></div>
+    <div class="emoji-container" id="offVideoButton" style="display: none;"><button class="text-xl">&#x1f4f5;</button></div>
+    <div class="emoji-container"><button class="text-xl">&#x1f64b;</button></div>
+    <div class="emoji-container rounded-full bg-white p-2">
+      <button id="reactButton" class="text-xl">&vellip;</button>
+    </div>
+    <div id="reactMenu">
+      <div class="emoji-container"><button class="text-4xl">&#129505;</button></div>
+      <div class="emoji-container"><button class="text-4xl">&#128552;</button></div>
+      <div class="emoji-container"><button class="text-4xl">&#128514;</button></div>
+      <div class="emoji-container"><button class="text-4xl">&#128591;</button></div>
+      <div class="emoji-container"><button class="text-4xl">&#x1F44D;</button></div>
+      <div class="emoji-container"><button class="text-4xl">&#127881;</button></div>
+    </div>
+
+    <script>
+      const toggleButton = (button, offButton) => {
+        button.addEventListener('click', () => {
+          button.style.display = 'none';
+          offButton.style.display = 'block';
+        });
+        offButton.addEventListener('click', () => {
+          offButton.style.display = 'none';
+          button.style.display = 'block';
+        });
+      };
+
+      toggleButton(document.getElementById('micButton'), document.getElementById('offMicButton'));
+      toggleButton(document.getElementById('videoButton'), document.getElementById('offVideoButton'));
+
+      const reactButton = document.getElementById('reactButton');
+      const reactMenu = document.getElementById('reactMenu');
+
+      reactButton.addEventListener('click', () => {
+        reactMenu.style.display = (reactMenu.style.display === 'block') ? 'none' : 'block';
+      });
+
+      reactMenu.addEventListener('click', (event) => {
+        const emoji = event.target.textContent;
+        if (emoji) {
+          for (let i = 0; i < 40; i++) {
+            const emojiRain = document.createElement('div');
+            emojiRain.textContent = emoji;
+            emojiRain.classList.add('rain-shower');
+            emojiRain.style.left = Math.random() * window.innerWidth + 'px';
+            emojiRain.style.top = Math.random() * window.innerHeight + 'px';
+            const size = Math.random() * 30 + 20;
+            emojiRain.style.fontSize = `${size}px`;
+            document.body.appendChild(emojiRain);
+            setTimeout(() => {
+              document.body.removeChild(emojiRain);
+            }, 3000);
+          }
+        }
+      });
+    </script>
+
+</body>
+
+</html>
