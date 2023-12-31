@@ -1,27 +1,21 @@
-//import modules
-const express = require('express');
-const mongoose = require('mongoose');
-const morgan = require('morgan');
-const cors = require('cors');
-require("dotenv").config();
-
-
-//app
+const express = require("express");
 const app = express();
 
-//database
+require('dotenv').config();
+const PORT = process.env.PORT || 4000;
 
-//middleware
-app.use(morgan('dev'));
-app.use(cors({origin: true,credentials: true}));
+// Cookie parser import kra liya
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
 
+app.use(express.json());
 
-//routes
+require("./config/database").connect();
+ 
+// Importation of Routes
+const user = require("./routes/user");
+app.use("/api/v1" , user);
 
-//port
-const port = process.env.PORT || 8080;
-
-//listener
-const server = app.listen(port, () =>
-    console.log('Server is running on port ${port}')
-);
+app.listen(PORT , () => {
+    console.log(`Server is running at ${PORT}`);
+})
