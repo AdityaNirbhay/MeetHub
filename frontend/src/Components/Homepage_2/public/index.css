@@ -1,0 +1,348 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Trirong", serif;
+}
+
+.wrapper{
+    height: 100vh;
+    color: rgb(247, 250, 249);
+    transition: filter 0ms ease-in-out 0ms;
+    position: relative;
+    overflow: hidden;
+    background-image: url(8c98994518b575bfd8c949e91d20548b.jpg);
+}
+
+.background-img{
+    position: absolute;
+    object-fit: contain;
+    z-index: -1;
+    opacity: 0;
+}
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.left-corner{
+    display: flex;
+    align-items: center;
+    justify-content: baseline;
+}
+
+.logo-image{
+    height: 50px;
+    width: 50px;
+    border-radius: 2px;
+}
+
+.logo-text{
+    margin-left: 1.2rem;
+    font-size: 34px;
+    font-weight: 900;
+    color: black;
+}
+
+.right-corner{
+    display: flex;
+    gap: 2rem;
+    padding: 0 4rem;
+}
+
+.login-button{
+    background-color: #000; 
+    color: white;
+    padding: 15px 30px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 3px;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    border: 2px solid black;
+}
+
+.login-button::before{
+    content: "";
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: all 0.8s;
+    z-index: -1;
+}
+
+.login-button:hover::before{
+    transform: scaleX(1);
+}
+
+.login-button:hover{
+    color: black;
+    border: 2px solid black;
+}
+
+.signup-button{
+    background-color: white; 
+    color: black;
+    padding: 15px 30px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    border: 2px solid black;
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+
+.signup-button::before{
+    content: "";
+    background-color: black;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: all 0.8s;
+    z-index: -1;
+}
+
+.signup-button:hover::before{
+    transform: scaleX(1);
+}
+
+.signup-button:hover{
+    color: white;
+}
+
+.main-section{
+    display: flex;
+    color: black;
+    height: 100%;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.left-part{
+    display: flex;
+    padding-left: 50px;
+    flex-direction: column;
+    height: 100%;
+}
+
+.generate-meet{
+    background-color: #e84949;
+    padding: 0.8rem 2.3rem;
+    color: white;
+    font-size: 18px;
+    box-shadow: 5px 5px 7px 0 #00003f49; 
+    position: relative; 
+    padding-right: 20px;
+    margin-right: 1rem;
+    left: 0;
+    right: 0;
+    display: flex;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.input-label{
+    padding: 0.5rem ;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border-radius: 0.2rem;
+    font-size: 15px;
+}
+
+.join-meet{
+    margin-top: 0.8rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.join-meet:hover{
+    text-decoration: underline;
+}
+
+.display-text{
+    line-height: 3.25rem;
+    font-size: 2.75rem;
+    letter-spacing: 0;
+    font-weight: 500;
+    margin-bottom: 100px;
+    margin-top: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-join{
+    display: flex;
+    flex-direction: row;
+}
+
+.right-part{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    justify-content: flex-end;
+}
+
+
+.video{
+    height: 25rem;
+    margin-left: 14rem;
+    margin-bottom: 5rem;
+}
+
+.popup{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    color: black;
+    top: -100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 450px;
+    height: 200px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px 5px rgba(0,0,0,0.1);
+    margin-top: -25px;
+    transition: top 0ms ease-in-out 300ms,
+    opacity 300ms ease-in-out, margin-top 300ms ease-in-out;
+}
+
+.popup > *{
+    margin: 15px 0px;
+}
+
+.popup .close-btn{
+    position: absolute;
+    top: -5px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    background: #eee;
+    color: #111;
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    font-weight: 600;
+    transition: all 0.02ms smooth;
+}
+
+.close-btn:hover{
+    background: red;
+}
+
+body.active-popup{
+    overflow: hidden;
+}
+
+body.active-popup .wrapper{
+    filter: blur(5px);
+    background: rgba(0,0,0,0.08);
+    transition: filter 0ms ease-in-out 0ms;
+}
+
+body.active-popup .wrapper .popup{
+    filter: none;
+}
+
+body.active-popup .popup{
+    top: 50%;
+    opacity: 1;
+    margin-top: 0px;
+    transition: top 0ms ease-in-out 0ms,
+                opacity 300ms ease-in-out, margin-top 300ms ease-in-out;
+}
+
+.start-meeting{
+    position: absolute;
+    background-color: #000; 
+    color: white;
+    padding: 15px 30px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 3px;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.meeting-id{
+    margin-bottom: 1rem;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.start-meeting:hover{
+    background: green;
+    border: solid green;
+}
+
+@media screen and (max-width: 600px) {
+
+    .navbar {
+        flex-direction: column;
+        padding: 0.5rem;
+    }
+
+    .left-part {
+        padding-left: 20px;
+    }
+
+    .display-text{
+        font-size: 2rem;
+    }
+
+    .right-part, .video-part {
+        display: none;
+    }
+
+    .generate-meet {
+        margin-right: 0;
+        margin-bottom: 8px;
+        width: 50%;
+        font-size: 14px;
+        padding: 10px 25px;
+        position: relative;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .display-text {
+        margin-bottom: 50px;
+        margin-top: 100px;
+    }
+
+    .button-join {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .right-corner{
+        margin-bottom: -650px;
+    }
+}
